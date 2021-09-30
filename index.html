@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href ="styles.css">
+    <!--Defer helps load after body of html-->
+    <script src = "script.js" defer></script>
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <!--Board Area-->
+    <div class="GameSpace"  id ="GameSpace">
+
+        <!--seprate css and js for that using id but not class -->
+        <!--create cells .cell*9-->
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        
+    </div>
+    <!--winning message-->
+    <div class="winning-message" id = "WinningMessage"><!--dispaly show class toggle-->
+        <div class="data-winning"></div>
+        <button id ="restartbt">Restart</button>
+    </div>
+    
+</body>
+</html>

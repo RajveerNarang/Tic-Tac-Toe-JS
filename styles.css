@@ -1,0 +1,155 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+:root{
+    --cell-size: 100px;
+    --symbol-size: calc(var(--cell-size)* .9); 
+}
+body{
+    margin: 0;
+
+}
+
+.GameSpace{
+    width: 100vw;
+    height:100vh;
+    display: grid;
+    justify-content: center ;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3,auto);
+}
+.cell{
+    width: var(--cell-size);
+    height:var(--cell-size);
+    background-color: whitesmoke;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor:pointer;/* pointer for unused cell*/
+}
+.cell.x,
+.cell.o{
+cursor: not-allowed;/* cell blocked*/
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before{
+    background-color: orange;
+}
+
+
+
+.GameSpace.x .cell:not(.x):not(.o):hover::before,
+.GameSpace.x .cell:not(.x):not(.o):hover::after,
+.GameSpace.o .cell:not(.x):not(.o):hover::before{
+background-color:lightgrey;
+/*over written by orange fix for that*/
+}
+
+
+
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9)/*could use last child for ninth location*/{
+    border-bottom: none;
+}
+.cell.x::before,
+.cell.x::after,
+.GameSpace.x .cell:not(.x):not(.o):hover::before,
+.GameSpace.x .cell:not(.x):not(.o):hover::after{
+    /*use plain css to create x and o  use sudo elements*/
+    content: '';/*empty string so that these x and o before and after  elements render*/
+    position:absolute;
+    width: calc(var(--symbol-size) * .15); 
+    height: var(--symbol-size);
+    
+}
+
+.cell.x::before,
+.GameSpace.x .cell:not(.x):not(.o):hover::before
+ {
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.GameSpace.x .cell:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after,
+.GameSpace.o .cell:not(.x):not(.o):hover::before,
+.GameSpace.o .cell:not(.x):not(.o):hover::after{
+    /*use plain css to create x and o  use sudo elements*/
+    content: '';/*empty string so that these x and o before and after  elements render*/
+    position:absolute;
+    border-radius: 50%;
+   
+}
+
+.cell.o::before,
+.GameSpace.o .cell:not(.x):not(.o):hover::before
+{
+    width: var(--symbol-size); 
+    height: var(--symbol-size);
+    
+}
+.cell.o::after,
+.GameSpace.o .cell:not(.x):not(.o):hover::after{
+    width: calc(var(--symbol-size) * .7); 
+    height: calc(var(--symbol-size)* .7);
+    background-color: white;
+}
+
+.winning-message{
+    /*not show the effect by default*/
+    display: none;
+    position: fixed ;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 5rem;
+    flex-direction: column;
+
+
+}
+.winning-message button{
+    font-size: 3rem;
+    border-color:white;
+    border: 1px solid black;
+    padding : .25em .5em;
+    cursor: pointer;
+
+    
+}
+.winning-message button:hover{
+    background-color:orange;
+    color: aliceblue;
+    border-color: white;
+
+}
+.winning-message.show{
+    display: flex;
+}
